@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from models import Contact
-from src.exceptions import ContatoNaoEncontrado
+from exceptions import ContatoNaoEncontrado
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -11,7 +11,7 @@ DATA_DIR.mkdir(exist_ok=True)
 FILE.touch(exist_ok=True)
 
 def load() -> list[Contact]:
-    if not FILE.exists():
+    if not FILE.exists() or FILE.stat().st_size == 0:
         return []
     with open(FILE) as f:
         data = json.load(f)
@@ -22,7 +22,7 @@ def save(contacts: list[Contact]) -> None:
         from dataclasses import asdict
         json.dump([asdict(c) for c in contacts], f, indent=2)
 
-def find_by_id(contacts: list[Contact], id: str) -> Contact:
+def search_by_id(contacts: list[Contact], id: str) -> Contact:
     for c in contacts:
         if c.id == id:
             return c
