@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 import uuid
 
 @dataclass
-class Contato:
+class Contact:
     nome: str
     telefone: str
     email: str
