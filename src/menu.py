@@ -65,8 +65,3 @@ def edit_contact():
         print("Contato atualizado!")
     except ContatoNaoEncontrado as e:
         print(f"Erro: {e}")
-
-add_contact()
-add_contact()
-remove_contact()
-edit_contact()
